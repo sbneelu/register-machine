@@ -64,13 +64,13 @@ for line in machine[1:]:
         sys.exit(6)
     instructions[index] = instruction
 
-pc = 0
+exec_num = 0
 if SHOW_TRACE:
-    print("pc, current index, register values")
+    print("execution no, current index, register values")
 while True:
     if SHOW_TRACE:
-        print(f"{pc}, {i}, {tuple(registers)}")
-    pc += 1
+        print(f"{exec_num}, {i}, {tuple(registers)}")
+    exec_num += 1
 
     if i not in instructions.keys():
         print("Erroneous HALT")
@@ -100,5 +100,5 @@ while True:
 
 print()
 print(f"Final register state: {tuple(registers)}")
-print(f"Number of operations: {pc}")
+print(f"Number of operations: {exec_num}")
 print(f"Last instruction index: {i}")

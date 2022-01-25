@@ -21,7 +21,7 @@ The possible instructions are:
 Blank lines are ignored, as are comment line starting with `#`.
 
 ## Machine output
-The machine outputs every operation in the comma-separated format `Program Counter, Instruction Label, Register State`.
+The machine outputs every operation in the comma-separated format `Execution Number, Instruction Label, Register State`.
 
 Set the `SHOW_TRACE` constant in `machine.py` to `False` to only see the final state after the program has terminated and not every operation along the way.
 
