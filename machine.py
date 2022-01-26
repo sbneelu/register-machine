@@ -26,11 +26,11 @@ for line in machine[1:]:
     line_list = line.split(":")
     if len(line_list) != 2:
         print(f"Invalid format for instruction {line}. Expected format: "
-              f"index: operation, ...arguments")
+              f"label: operation, ...arguments")
         sys.exit(3)
-    index, instruction_string = int(line_list[0]), line_list[1]
-    if index in instructions:
-        print(f"Multiple instructions have index {index}")
+    label, instruction_string = int(line_list[0]), line_list[1]
+    if label in instructions:
+        print(f"Multiple instructions have label {label}")
         sys.exit(4)
     instruction = {"operation": None, "register": None, "arguments": None}
     arguments = instruction_string.split(",")
@@ -62,11 +62,11 @@ for line in machine[1:]:
     if instruction["operation"] is None:
         print(f"Invalid instruction: {line}")
         sys.exit(6)
-    instructions[index] = instruction
+    instructions[label] = instruction
 
 exec_num = 0
 if SHOW_TRACE:
-    print("execution no, current index, register values")
+    print("Execution Number, Instruction Label, Register State")
 while True:
     if SHOW_TRACE:
         print(f"{exec_num}, {i}, {tuple(registers)}")
@@ -101,4 +101,4 @@ while True:
 print()
 print(f"Final register state: {tuple(registers)}")
 print(f"Number of operations: {exec_num}")
-print(f"Last instruction index: {i}")
+print(f"Last instruction label: {i}")
