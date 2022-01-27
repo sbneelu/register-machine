@@ -8,16 +8,23 @@ if len(sys.argv) != 2:
     sys.exit(1)
 
 with open(sys.argv[1], "r") as f:
-    machine = [line for line in f.read().lower()
-               .replace(" ", "").splitlines() if line and line[0] != "#"]
+    machine = [
+        line
+        for line in f.read().lower().replace(" ", "").splitlines()
+        if line and line[0] != "#"
+    ]
 
 
 config_match = re.search(r"(\d+(,\d+)*)", machine[0])
 if config_match is None:
-    print("Invalid format for initial configuration. Expected: (first "
-          "instruction, ...initial register values)")
+    print(
+        "Invalid format for initial configuration. Expected: (first "
+        "instruction, ...initial register values)"
+    )
     sys.exit(2)
-config = [int(c) for c in config_match.group().split(",")]
+config = [
+    int(c) if i else c for i, c in enumerate(config_match.group().split(","))
+]
 i, registers = config[0], config[1:]
 
 
@@ -25,10 +32,12 @@ instructions = {}
 for line in machine[1:]:
     line_list = line.split(":")
     if len(line_list) != 2:
-        print(f"Invalid format for instruction {line}. Expected format: "
-              f"label: operation, ...arguments")
+        print(
+            f"Invalid format for instruction {line}. Expected format: "
+            f"label: operation, ...arguments"
+        )
         sys.exit(3)
-    label, instruction_string = int(line_list[0]), line_list[1]
+    label, instruction_string = line_list
     if label in instructions:
         print(f"Multiple instructions have label {label}")
         sys.exit(4)
@@ -58,7 +67,7 @@ for line in machine[1:]:
         register = int(register_string[1:])
         instruction["operation"] = operation
         instruction["register"] = register
-        instruction["arguments"] = [int(arg) for arg in args]
+        instruction["arguments"] = args
     if instruction["operation"] is None:
         print(f"Invalid instruction: {line}")
         sys.exit(6)
@@ -82,7 +91,7 @@ while True:
     if reg is not None and reg >= len(registers):
         for _ in range(reg - len(registers) + 1):
             registers.append(0)
-    
+
     if op == "halt":
         print("Proper HALT")
         break

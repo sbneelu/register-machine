@@ -1,14 +1,14 @@
 # Register machine
 
-An implementation of the register machine introduced in Lecture 2 of the Cambridge CST IB Computation Theory course.
+An implementation of a register machine with three instructions: increment, decrement, and halt.
 
 ## Usage
 `python3 machine.py input_file.reg`
 
 ## Input file structure
-The first line needs to be an initial configuration (as used in the lecture course). This is a tuple whose 0th element is the first instruction, and subsequent elements are initial register values.
+The first line needs to be an initial configuration. This is a tuple whose 0th element is the label of the first instruction, and subsequent elements are initial register values. For example, `(0, 0, 2, 4)` means the first instruction is label `0` and the registers start with the values `(r0, r1, r2) = (0, 2, 4)`.
 
-All parsed lines after this are instructions. Instructions start with a label (which can be any integer value but should probably be a natural number), followed by a colon (`:`), and then the instruction.
+All parsed lines after this are instructions. Instructions start with a label (which can be made up of any ASCII characters except colons and whitespace characters such as spaces and line breaks), followed by a colon (`:`), and then the instruction.
 
 ### Instructions
 
@@ -26,4 +26,4 @@ The machine outputs every operation in the comma-separated format `Execution Num
 Set the `SHOW_TRACE` constant in `machine.py` to `False` to only see the final state after the program has terminated and not every operation along the way.
 
 ## Examples
-See the `.reg` files in this repo for examples.
+See the `examples` directory in this repo for examples.
