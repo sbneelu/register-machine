@@ -18,7 +18,7 @@ The possible instructions are:
 - `dec(ry), i, j`: if register `y` > 0 then decrement it and go to instruction `i`, otherwise go to instruction `j`.
 
 ### Comments and blank lines
-Blank lines are ignored, as are comment line starting with `#`.
+Blank lines are ignored, as are comment lines starting with `#`.
 
 ## Machine output
 The machine outputs every operation in the comma-separated format `Execution Number, Instruction Label, Register State`.
